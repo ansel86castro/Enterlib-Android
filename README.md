@@ -1,3 +1,4 @@
+
 # Enterlib Android
 
 Enterlib helps to decouple application components in to separated logical layers where the communications between them is through well-defined interfaces or code contracts. The architecture will help to write reusable, robust and testable components that can scale with with little changes in the code. Also the framework provides utilities for:
@@ -72,49 +73,44 @@ The `LifeType` enum specify how the depency infection engine creates the objects
 Enterlib provides a powerfull Object Relational Mapper (ORM) to Sqlite Databases. You just neeed to define your data models as simple Java classes with mapping annotations as follows:
 
 ```java
-  @TableMap(name = "Accounts")
-  public class Account{
+	@TableMap(name = "Accounts")  
+	public class Account{  
+	  
+		@ColumnMap(key = true)  
+		public int Id;  
 
-        @ColumnMap(key = true)
-        public int Id;
+		@ColumnMap  
+		public String Name;  
 
-        @ColumnMap
-        public String Name;
+		@ColumnMap  
+		@ForeingKey(model = Currency.class)  
+		 public int CurrencyId;  
 
-        @ColumnMap
-        @ForeingKey(model = Currency.class)
-        public int CurrencyId;
-		
-        //Including related object properties
-        @ExpressionColumn(expr = "CurrencyId.Name")
-        public String CurrencyName;
-		
-        //Including related object properties
-        @ExpressionColumn(expr = "CurrencyId.CreateDate")
-        public Date CurrencyCreateDate;
+		@ExpressionColumn(expr = "CurrencyId.Name")  
+		 public String CurrencyName;  
 
-		//Aggregation Column
-        @ColumnMap(column = "Id")
-        @ForeingKey(model = Transaction.class, field = "AccountId")
-        @ExpressionColumn(expr = "SUM(Transaction.Amount)")
-        public double Balance;
+		@ExpressionColumn(expr = "CurrencyId.CreateDate")  
+		 public Date CurrencyCreateDate;  
 
-		//Allow filtering for many-to-one relationships
-        @ColumnMap(column = "Id", nonMapped = true)
-        @ForeingKey(model = Transaction.class, field = "AccountId")
-        @ExpressionColumn(expr = "Transaction.Description")
-        public String Description;
+		@ColumnMap(column = "Id")  
+		 @ForeingKey(model = Transaction.class, field = "AccountId")  
+		 @ExpressionColumn(expr = "SUM(Transactions.Amount)")  
+		 public double Balance;  
 
-		//Navigation Property
-        
-        private Currency currency;
-        public Currency getCurrency(){
-            return currency;
-        }
-        public void setCurrency(Currency value){
-            this.currency = value;
-        }
-    }
+		@ColumnMap(column = "Id", nonMapped = true)  
+		 @ForeingKey(model = Transaction.class, field = "AccountId")  
+		 @ExpressionColumn(expr = "Transactions.Description")  
+		 public String Description;  
+
+
+		private Currency currency;  
+		public Currency getCurrency(){  
+		    return currency;  
+		}  
+		public void setCurrency(Currency value){  
+		    this.currency = value;  
+		}  
+	}
 
     @TableMap(name = "Transactions")
     public class Transaction{
@@ -184,19 +180,18 @@ First of all if you have stored you sqlite file in the assets directory you can 
 ```
 This operation will copy the file from the assets directory to the data directory of your application . The parameter "db.db3" is the filename of your sqlite database file in the assets folder. In addition the operation checks if the file was deployed to avoid deploying again. You can force the deploying calling `EntityMapContext.deploy(this, "db.db3", true);`
 
-Next then create an `EntityContext` as follows:
+Next then create an `IEntityContext` as follows:
 
 ```java
 
 IEntityContext context = new EntityMapContext(MainApp.this, "db.db3"); 
 ```
-
+The `IEntityContext` works as a repository factory. You can use the `IRepository<T>` for persisting and query your entities.
 ```java
-IRepository<Transaction> map = entityContext.getRepository(Transaction.class);
 
-ArrayList<Transaction> list = map.query().toList();
-transaction = map.query().first();
-
+	IRepository<Transaction> map = context.getRepository(Transaction.class);
+	ArrayList<Transaction> list = map.query().toList();
+	
 ```
 Generates the following SQL
 
@@ -210,23 +205,74 @@ SELECT t0.Description as "Description"
 FROM "Transactions" t0
 INNER JOIN "Accounts" t1 on t1.Id = t0.AccountId 
 INNER JOIN "Currencies" t2 on t2.Id = t1.CurrencyId 
-
 ```
-using filters and aggregations
+#### Performing CRUD Operations
+```java
+	transaction  = new Transaction();
+
+	//Creates a new entity in the persisting store
+	map.create(transaction);  
+	
+	//update the entity in the persisting store with new values  
+	map.update(transaction);  
+  
+   //delete the entity from the persisting store
+    map.delete(transaction);  
+	
+	//delete all entities that meet the condition
+	map.delete("Description = 'Abc'");  
+   
+   //returns the total of entities in the store
+	map.query().count();
+	
+	//return the first element in the query
+	transaction = map.query().first();
+```
+####  Lazy Evaluation
+Cursors are a way to iterate through the query in a efficient way due to the entities are loaded on demand so this optimize memory usage and is the recommened mechanism for iterating large collections.
+```java
+IRepository<Transaction> map = context.getRepository(Transaction.class); 
+IEntityCursor<Transaction> cursor = map.query().toCursor();
+for (Transaction t: cursor ) {  
+      //do something with t
+}
+cursor.close();
+```
+The `IEntityCursor<T>` provides the following interface
+```java
+public interface IEntityCursor<T> extends IClosable, Iterable<T> {  
+		//return the total of elements in the query
+	   int getCount();  
+	  
+	  //return an element if at the specified position
+	  T getItem(int position);  
+  }
+```
+
+#### Using filters and functions
+Enterlib's ORM supports the following  functions
+
+- sum(expression)
+- avg(expression)
+- count(expression)
+- max(expression)
+- min(expression)
+- concat(expression): for string fields, returns the concatenations of the values 
+- ifnull(exp1, exp2) :returns exp2 if exp1 is null
+- contains([InverseNavigarionProperty].[expression]) : returns true if any element in the inverse navigation field meet the condition in [expression]
+
 ```java
 
   IRepository<Account> map = context.getRepository(Account.class);
   IQuerable<Account> querable  = map.query()
                 .include("Currency")
                 .where("CurrencyId.Name = 'USD'")
-                .where("AVG(Transaction.Amount) > 5")
+                .where("AVG(Transactions.Amount) > 5")
                 .orderBy("Name desc")
                 .skip(5)
                 .take(10);
                 
 ArrayList<Transaction> list = querable.toList();
-
-ArrayList<Transaction>
 ```
 
 Will generate the following SQL
@@ -251,17 +297,14 @@ LIMIT 10
 OFFSET 5
 ```
 
-Using nonMapped Columns for filtering
-
+#### Using nonMapped Columns for filtering
+Suppose you want to retrieve all Accounts which have transactions and transaction's  Description start with 'Abc'.
 ```java
  IRepository<Account> map = context.getRepository(Account.class);
  IQuerable<Account> querable  = map.query()
-                .where("Description = 'Abc'")
-                .skip(5)
-                .take(10);
+               .where("Description like 'Abc%'");
 ```
 Generates the following SQL
-
 ```sql
 SELECT t1.CreateDate as "CurrencyCreateDate"
 ,t0.Id as "Id"
@@ -272,13 +315,21 @@ SELECT t1.CreateDate as "CurrencyCreateDate"
 FROM "Accounts" t0
 INNER JOIN "Currencies" t1 on t1.Id = t0.CurrencyId 
 LEFT OUTER JOIN "Transactions" t2 on t2.AccountId = t0.Id 
-WHERE t0.Id = 'Abc'
+WHERE t2.Description LIKE 'Abc%'
 GROUP BY t0.Id,t1.CreateDate,t0.Name,t0.CurrencyId,t1.Code
-LIMIT 10
-OFFSET 5
 ```
+For this to works you need to define the field **Description** in the Account classs as follows:
+```java
+@ColumnMap(column = "Id", nonMapped = true)  
+@ForeingKey(model = Transaction.class, field = "AccountId")  
+@ExpressionColumn(expr = "Transactions.Description")  
+public String Description;
+```
+Using the annotations you can inform the ORM where to look for this Description column.  For example the `ExpressionColumn` sais the field is mapped to the `Description` member of the inverse navigation variable named `Transactions`.  But where this `Transactions` come from? 
+This is specified by the `ForeingKey` annotation ,it  sais the  inverse navigation variable named `Transactions`is defined by the `Transaction` class and is related to the Account entity throught the `Transaction.AccountId` field with the `Account.Id` speficied in the `ColumnMap` annotation. The parameter `nonMapped = true` in the `ColumnMap` is to not include this Description column in the query result so it's use only for filtering purpose.
 
-using column alias
+#### Using column alias name
+You can query your entities for alias field like `CurrencyName` is an alias of `CurrencyId.Name`
 ```java
  IRepository<Account> map = context.getRepository(Account.class);
  IQuerable<Account> querable  = map.query()
@@ -300,8 +351,7 @@ GROUP BY t0.Id,t1.CreateDate,t0.Name,t0.CurrencyId,t1.Code
 
 ```
 
-Using `contains` filter function
-
+#### Using  advance filter function
 ```java
 IRepository<Category> map = context.getRepository(Category.class);
 IQuerable<Category> querable  = map.query()
@@ -316,6 +366,13 @@ FROM "Category" t0
 WHERE t0.Id IN (SELECT t0.CategoryId as "CategoryId"
 FROM "AccountCategory" t0
 WHERE t0.AccountId = 5)
+```
+In the example above the we are getting all the Categories entities that are associated with a Account with Id = 5.
+Again the `Category` class must specified the inverse navigation property `Accounts` to the relationship as shown bellow:
+```java
+@ColumnMap(column = "Id", nonMapped = true)  
+@ForeingKey(model = AccountCategory.class, field = "CategoryId")  
+public ArrayList<AccountCategory> Accounts;
 ```
        
 A more complex example using `contains` 
@@ -356,5 +413,3 @@ WHERE t2.Code = 'UYU')
 ```
 
 
-
-      
