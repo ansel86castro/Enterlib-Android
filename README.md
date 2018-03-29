@@ -175,7 +175,7 @@ Enterlib provides a powerfull Object Relational Mapper (ORM) to Sqlite Databases
 ```
 
 First of all if you have stored you sqlite file in the assets directory you can deploy it calling 
-```
+```java
  EntityMapContext.deploy(this, "db.db3");
 ```
 This operation will copy the file from the assets directory to the data directory of your application . The parameter "db.db3" is the filename of your sqlite database file in the assets folder. In addition the operation checks if the file was deployed to avoid deploying again. You can force the deploying calling `EntityMapContext.deploy(this, "db.db3", true);`
