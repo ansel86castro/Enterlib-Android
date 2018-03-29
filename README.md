@@ -276,6 +276,7 @@ ArrayList<Transaction> list = querable.toList();
 ```
 
 Will generate the following SQL
+
 ```sql
 SELECT t1.CreateDate as "CurrencyCreateDate"
 ,t0.Id as "Id"
@@ -296,6 +297,44 @@ ORDER BY t0.Name DESC
 LIMIT 10
 OFFSET 5
 ```
+
+Another more complex example using and include chain
+
+```java
+    IRepository<Transaction> map = context.getRepository(Transaction.class);
+    
+    IQuerable<Transaction> query  = map.query()
+            .include("Account.Currency")
+            .where("Account.Currency.Name = 'USD'");
+
+    System.out.println(query.toString());
+```
+Will produce the following sql
+
+```sql
+SELECT t0.Id as "Id"
+,t0.Description as "Description"
+,t0.Amount as "Amount"
+,t0.AccountId as "AccountId"
+,t1.Name as "AccountName"
+,t2.Code as "CurrencyName"
+,t1.Id as ".Account.Id"
+,t1.Name as ".Account.Name"
+,t1.CurrencyId as ".Account.CurrencyId"
+,t2.Code as ".Account.CurrencyName"
+,t2.CreateDate as ".Account.CurrencyCreateDate"
+,total(t3.Amount) as ".Account.Balance"
+,t2.Id as ".Account.Currency.Id"
+,t2.Code as ".Account.Currency.Name"
+,t2.CreateDate as ".Account.Currency.CreateDate"
+FROM "Transactions" t0
+INNER JOIN "Accounts" t1 on t1.Id = t0.AccountId 
+INNER JOIN "Currencies" t2 on t2.Id = t1.CurrencyId 
+LEFT OUTER JOIN "Transactions" t3 on t3.AccountId = t1.Id 
+WHERE t2.Code = 'USD'
+GROUP BY t2.Code,t0.Description,t1.Name,t2.Id,t0.Amount,t0.Id,t1.CurrencyId,t1.Id,t0.AccountId,t2.CreateDate
+```
+As you can see you can use this expression `Account.Currency.Name` or this `AccountId.CurrencyId.Name` in the `where` method because by convention if the field is not found the then ORM will look for a field with the given name but ending in "Id". 
 
 #### Using nonMapped Columns for filtering
 Suppose you want to retrieve all Accounts which have transactions and transaction's  Description start with 'Abc'.
