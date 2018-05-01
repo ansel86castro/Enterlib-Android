@@ -16,7 +16,7 @@ Enterlib helps to decouple application components in to separated logical layers
 - Additional set of Widgets
 
 # Maven Repository
-The library can be downloaded from [maven](https://dl.bintray.com/ansel86castro/enterlib). In addition to add the library to your project
+The library can be downloaded from [maven](https://dl.bintray.com/ansel86castro/enterlib). In addition for adding the library to your project
 add an additional repository to your gradle file as shown below:
 
 ```gradle
@@ -35,7 +35,7 @@ buildscript {
 }
 ```
 
-After that you can add the depency as shown below:
+After the repository is added you can reference the dependency to the library as shown below:
 ```gradle
 dependencies {
  ...... other dependencies
