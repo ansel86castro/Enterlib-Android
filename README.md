@@ -15,6 +15,37 @@ Enterlib helps to decouple application components in to separated logical layers
 - Implementing ViewModels
 - Additional set of Widgets
 
+# Maven Repository
+The library can be downloaded from [maven](https://dl.bintray.com/ansel86castro/enterlib). In addition to add the library to your project
+add an additional repository to your gradle file as shown below:
+
+```gradle
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://dl.bintray.com/ansel86castro/enterlib" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+```
+
+After that you can add the depency as shown below:
+```gradle
+dependencies {
+ ...... other dependencies
+
+    compile 'com.cybtans:enterlib:2.0.0@aar'
+ 
+ .......
+}
+```
+
 ### Dependency Injection
 
 Enterlib supports a depency injection engine using a `DependencyContext` object 
@@ -229,7 +260,7 @@ INNER JOIN "Currencies" t2 on t2.Id = t1.CurrencyId
 	transaction = map.query().first();
 ```
 ####  Lazy Evaluation
-Cursors are a way to iterate through the query in a efficient way due to the entities are loaded on demand so this optimize memory usage and is the recommened mechanism for iterating large collections.
+Cursors are a way to iterate through the query in a efficient way due to the entities are loaded on demand so this optimize memory usage and it is the recommended mechanism for iterating large collections.
 ```java
 IRepository<Transaction> map = context.getRepository(Transaction.class); 
 IEntityCursor<Transaction> cursor = map.query().toCursor();
@@ -238,6 +269,16 @@ for (Transaction t: cursor ) {
 }
 cursor.close();
 ```
+
+Also another more closed form can be use that is equivalent to the code above
+```java
+IRepository<Transaction> map = context.getRepository(Transaction.class); 
+for (Transaction t: map.query() ) {  
+      //do something with t
+}
+ 
+```
+
 The `IEntityCursor<T>` provides the following interface
 ```java
 public interface IEntityCursor<T> extends IClosable, Iterable<T> {  
@@ -337,7 +378,7 @@ GROUP BY t2.Code,t0.Description,t1.Name,t2.Id,t0.Amount,t0.Id,t1.CurrencyId,t1.I
 As you can see you can use this expression `Account.Currency.Name` or this `AccountId.CurrencyId.Name` in the `where` method because by convention if the field is not found the then ORM will look for a field with the given name but ending in "Id". 
 
 #### Using nonMapped Columns for filtering
-Suppose you want to retrieve all Accounts which have transactions and transaction's  Description start with 'Abc'.
+Suppose you want to retrieve all the accounts having its transactions's descriptions begining with 'Abc'.
 ```java
  IRepository<Account> map = context.getRepository(Account.class);
  IQuerable<Account> querable  = map.query()
