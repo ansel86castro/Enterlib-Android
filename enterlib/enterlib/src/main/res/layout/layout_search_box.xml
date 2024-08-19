@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		  android:layout_width="wrap_content" 
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"	>
+
+	<FrameLayout  
+       	android:id="@+id/container" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@+id/search_action_panel"
+        android:layout_toStartOf="@+id/search_action_panel">
+             
+		<EditText
+		    android:id="@+id/searchEdit"		    
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"			  			   			   
+		    android:imeOptions="actionSearch"
+		    android:inputType="text"
+		    android:maxLines="1">			    
+		   	 <requestFocus />			    
+		    </EditText>
+			
+			<!-- 
+				android:background="@drawable/btn_search_dialog_voice_default"			
+				android:ems="10"   
+				android:background="@null"				
+			-->
+	</FrameLayout>
+	
+	<LinearLayout
+	    android:id="@+id/search_action_panel" 
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_centerVertical="true"	    		
+   	    android:layout_alignParentRight="true">
+		
+		<ImageButton
+		    		android:id="@+id/imageBtnClear"		    		    			    	   
+		    		android:layout_width="wrap_content" 
+		    		android:layout_height="wrap_content"	    		
+		   		    android:src="@drawable/ic_clear_normal"
+		   		    android:background="@null"		   		  		   		    
+		   		     android:visibility="visible"/>
+		
+		<ImageButton
+		    		android:id="@+id/showCriterias"		    		
+		    		android:layout_width="wrap_content" 
+		    		android:layout_height="wrap_content"	    		
+		   		    android:src="@drawable/btn_open_filters"
+		   		    android:background="@null"
+		   		    android:paddingLeft="3dp"
+		   		    />
+	</LinearLayout>
+
+</RelativeLayout>
+

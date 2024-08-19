@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+     <LinearLayout android:id="@+id/day_names"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"               
+        android:background="@color/calendar_header"
+        android:gravity="fill_horizontal" >
+
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LUN"
+            android:gravity="center" />
+         <ImageView android:layout_width="1dip" android:layout_height="match_parent" android:scaleType="fitXY" android:src="@color/calendar_month_line_separator" />
+        
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MAR"            
+            android:gravity="center" />
+        	<ImageView android:layout_width="1dip" android:layout_height="match_parent" android:scaleType="fitXY" android:src="@color/calendar_month_line_separator" />
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MIE"
+            android:gravity="center" />
+        	<ImageView android:layout_width="1dip" android:layout_height="match_parent" android:scaleType="fitXY" android:src="@color/calendar_month_line_separator" />
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="JUE"
+            android:gravity="center" />
+        	<ImageView android:layout_width="1dip" android:layout_height="match_parent" android:scaleType="fitXY" android:src="@color/calendar_month_line_separator" />
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="VIE"
+            android:gravity="center" />
+        	<ImageView android:layout_width="1dip" android:layout_height="match_parent" android:scaleType="fitXY" android:src="@color/calendar_month_line_separator" />
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SAB"
+            android:gravity="center" />
+        	<ImageView android:layout_width="1dip" android:layout_height="match_parent" android:scaleType="fitXY" android:src="@color/calendar_month_line_separator" />
+
+        <TextView android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DOM"
+            android:gravity="center" />        	
+
+    </LinearLayout>
+    
+     <ImageView android:layout_width="match_parent"
+       android:layout_height="1dip"
+       android:scaleType="fitXY"
+       android:gravity="fill_horizontal"
+       android:src="@color/calendar_month_line_separator" />
+
+    <ListView android:id="@+id/weekList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="false"
+        android:cacheColorHint="@android:color/transparent"
+        android:fastScrollEnabled="false"
+        android:overScrollMode="never" />
+
+</LinearLayout>

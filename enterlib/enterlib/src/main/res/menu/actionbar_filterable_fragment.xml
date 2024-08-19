@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools" >
+    
+     <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"        
+        android:title="@string/search"        
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="com.enterlib.widgets.ConditionFilterView" />
+     
+<!--      <item android:id="@+id/action_share" -->
+<!--           android:title="Compartir"           -->
+<!--           app:showAsAction="ifRoom" -->
+<!--           app:actionProviderClass="android.support.v7.widget.ShareActionProvider" -->
+<!--           /> -->
+     
+    <!-- app:actionViewClass="android.support.v7.widget.SearchView" -->
+
+</menu>

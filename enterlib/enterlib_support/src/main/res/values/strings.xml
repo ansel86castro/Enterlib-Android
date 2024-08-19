@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">enterlib_media</string>
+    <string name="select_folder_warning">Select a Folder</string>
+</resources>

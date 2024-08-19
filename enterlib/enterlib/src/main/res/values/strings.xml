@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">    
+    <string name="error">Error</string>
+    <string name="warning">Warning</string>
+    <string name="info">Info</string>
+    <string name="validation_error">Check the invalid fields</string>
+    <string name="cerrar">Close</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">OK</string>
+    <string name="salvando">Saving &#8230;</string>
+    <string name="salvado">Saved successfully</string>
+    <string name="loading">loading &#8230;</string>
+    <string name="nofificaciones">Notifications</string>
+    <string name="no_se_pudo_salvar">Could not save</string>
+    <string name="conexion_fallida">Connection failure. Try to conect later</string>
+    <string name="no_hay_datos">There are not any data available</string>
+    <string name="verifique_los_campos_se_alados">Check out the shown fields</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="refresh">Reload</string>
+    <string name="search">Search</string>
+    <string name="sort">Sort</string>
+    <string name="empty_list_message">list empty</string>
+    <string name="required">Required</string>
+    <string name="validation_fail_message">There are invalid data</string>
+    <string name="dialog_conditions_title">Search Criteria</string>
+    <string name="condition_filter_dialog_close">Close</string>
+    <string name="condition_filter_dialog_criterias">Criteria</string>
+    <string name="dialog_contition_searchbutton">Search</string>
+    <string name="dialog_contition_resetbutton">Clean</string>
+    <string name="dialog_contition_closebutton">Close</string>
+    <string name="multiple_filter_dialog_accept">OK</string>
+    <string name="multiple_filter_dialog_cancel">Cancel</string>
+    <string name="err_invalid_email">Email not valid</string>
+    <string name="menu_item_fecha_actual">Current</string>
+    <string name="menu_item_limpiar">Clear</string>
+    <string name="linking">Linking&#8230;</string>    
+    <string name="select_all">Select Visibles</string>
+    <string name="clear_selection">Clear Selection</string>    
+    <string name="deleting">Deleting&#8230;</string>    
+    <string name="deleteDialogTitle">Do you want to delete the selected items?</string>
+    <string name="add_event">Add Event</string>
+    <string name="invalid_format">Invalid Format</string>
+
+</resources>

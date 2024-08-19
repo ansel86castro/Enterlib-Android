@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">  
+    <string name="error">Error</string>
+    <string name="validation_error">Revise los campos señalados</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="accept">OK</string>
+    <string name="salvando">Guardando &#8230;</string>
+    <string name="salvado">Guardado satisfactoriamente</string>
+    <string name="loading">Cargando &#8230;</string>
+    <string name="nofificaciones">Nofificaciones</string>
+    <string name="no_se_pudo_salvar">No se pudo guardar</string>
+    <string name="conexion_fallida">Se ha perdido la conexión. Intente conectarse de nuevo mas tarde</string>
+    <string name="no_hay_datos">No hay datos disponibles</string>
+    <string name="verifique_los_campos_se_alados">Verifique los campos señalados</string>
+    <string name="ascending">Ascendente</string>
+    <string name="descending">Descendente</string>
+    <string name="refresh">Refrescar</string>
+    <string name="search">Buscar</string>
+    <string name="sort">Ordenar</string>
+    <string name="empty_list_message">Lista vacía</string>
+    <string name="required">Requerido</string>
+    <string name="validation_fail_message">Datos no válidos</string>
+    <string name="dialog_conditions_title">Criterios de Búsqueda</string>
+    <string name="condition_filter_dialog_close">Cerrar</string>
+    <string name="condition_filter_dialog_criterias">Criterios</string>
+    <string name="dialog_contition_searchbutton">Buscar</string>
+    <string name="dialog_contition_resetbutton">Limpiar</string>
+    <string name="dialog_contition_closebutton">Cerrar</string>
+    <string name="multiple_filter_dialog_accept">Aceptar</string>
+    <string name="multiple_filter_dialog_cancel">Cancelar</string>
+    <string name="err_invalid_email">Email no válido</string>
+    <string name="menu_item_fecha_actual">Actual</string>
+    <string name="menu_item_limpiar">Limpiar</string>
+ 	<string name="linking">Asociando&#8230;</string> 
+    <string name="select_all">Seleccionar Visibles</string>
+	<string name="clear_selection">Limpiar Selección</string>
+	<string name="deleting">Eliminando&#8230;</string>
+	<string name="deleteDialogTitle">Desea eliminar los elementos seleccionados?</string>
+    <string name="invalid_format">Invalid Format</string>
+    <string name="add_event">Añadir Evento</string>
+    <string name="warning">Aviso</string>
+    <string name="info">Información</string>
+
+</resources>

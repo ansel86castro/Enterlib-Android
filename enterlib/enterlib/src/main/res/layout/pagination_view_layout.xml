@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:enterlib="http://schemas.android.com/apk/res-auto"    >
+<LinearLayout    
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/pageBackward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"      
+        android:background="@null"     
+        android:src="@drawable/ic_action_playback_rew" />
+
+     <com.enterlib.widgets.NumPickerButton
+         android:id="@+id/pageCurrent"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center_vertical"
+         android:gravity="center_vertical"
+         android:text="10"
+        
+         enterlib:maxValue="20"
+         enterlib:minValue="0" />
+     
+    <ImageButton
+       android:id="@+id/pageForward"
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"     
+       android:background="@null" 
+       android:src="@drawable/ic_action_playback_forw" />
+
+    <TextView
+        android:id="@+id/rangeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="1-50 Total:500"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+     <ImageButton
+         android:id="@+id/pageConfig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"     
+         android:background="@null"
+         android:src="@drawable/ic_action_document" />
+
+</LinearLayout>
+</merge>

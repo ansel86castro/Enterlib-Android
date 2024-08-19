@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+     <color name="gray" >#e6e6e6</color>
+     <color name="white" >#FFFFFF</color>
+     <color name = "hint" >#b4b4b4</color>
+     <color name = "error" >#f9d8d8</color>
+     <color name="calendar_focused_month_day">#faf1d7</color>
+     <color name="calendar_event">#3ffa00</color>
+     <color name="calendar_month_line_separator">#a5a194</color>
+     <color name="calendar_header">#e5e5e5</color>
+     <color name="calendar_unfocused_month">#ffffff</color>
+     <color name="calendar_new_event">#00f5e1</color>
+     <color name ="calendar_unfocused_month_number">#b4b4b4</color>
+     <color name ="calendar_focused_month_number">#FF000000</color>     
+     <color name ="day_event_hour">#e5e5e5</color>
+     <color name ="day_event">#3ffa00</color>
+     <color name ="day_event_line_separator">#a5a194</color>
+     <color name ="day_event_empty">#ffffff</color>
+     <color name ="day_event_text_color">#FF000000</color>
+     
+</resources>

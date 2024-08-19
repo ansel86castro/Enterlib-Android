@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+           
+    <declare-styleable name="LabeledTextView">
+		<attr name="labelStyle" format="string">
+		       <flag name="normal" value="0" />
+        	   <flag name="bold" value="1" />
+        	   <flag name="italic" value="2" />
+		</attr>
+		<attr name="labelText" format="string" />
+		<attr name="contentMargin" format="dimension" />
+	</declare-styleable>
+	
+    <declare-styleable name="NumPickerButton">
+		<attr name="maxValue" format="integer" />
+		<attr name="minValue" format="integer" />
+		<attr name="value" format="integer" />				       			
+	</declare-styleable>
+
+	<declare-styleable name="HorizontalNumPicker">
+		<attr name="picker_maxValue" format="integer" />
+		<attr name="picker_minValue" format="integer" />
+		<attr name="picker_value" format="integer" />
+	</declare-styleable>
+	        
+    
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">enterlib_media</string>
+    <string name="select_folder_warning">Seleccionar Carpeta</string>
+</resources>
